@@ -11,18 +11,18 @@ import javax.persistence.*;
 @Entity
 @ToString(of = "id")
 @Table(name = "PERSONAL_INFO", uniqueConstraints = {
-        @UniqueConstraint(name = "UNQ_PERSONAL_INFO_CV", columnNames = {"CV_ID"})
+        @UniqueConstraint(name = "UNQ_PERSONAL_INFO_RESUME", columnNames = {"RESUME_ID"})
 })
 public class PersonalData {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Integer id;
-    private String name;
+    private String fullName;
     @Enumerated(EnumType.STRING)
-    private Genero genero;
+    private Gender gender;
 
     @OneToOne(optional = false)
-    @JoinColumn(name="CV_ID")
-    private CV cv;
+    @JoinColumn(name="RESUME_ID")
+    private Resume resume;
 }

@@ -12,30 +12,30 @@ import java.util.Set;
 @Builder
 @Entity
 @ToString(of = "id")
-public class CV {
+public class Resume {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Integer id;
 
-    @OneToOne(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "resume", cascade = CascadeType.ALL, orphanRemoval = true)
     private PersonalData personalData;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name="USER_ID")
-    private User user;
+    @JoinColumn(name="PERSON_ID")
+    private Person person;
 
-    @OneToMany(mappedBy = "cv", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 
 
-    public CV(PersonalData personalData, User user) {
+    public Resume(PersonalData personalData, Person person) {
         this.personalData = Objects.requireNonNull(personalData);
-        this.user = Objects.requireNonNull(user);
-        this.personalData.setCv(this);
+        this.person = Objects.requireNonNull(person);
+        this.personalData.setResume(this);
     }
 
-    public CV(int id) {
+    public Resume(int id) {
         this.id=id;
     }
 

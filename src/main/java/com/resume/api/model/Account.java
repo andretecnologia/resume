@@ -1,10 +1,7 @@
 package com.resume.api.model;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -12,7 +9,10 @@ import javax.persistence.Id;
 @Builder
 @Entity
 @ToString(of = "id")
-public class User {
+@Table(name = "ACCOUNT", uniqueConstraints = {
+        @UniqueConstraint(name = "UNQ_ACCOUNT_PERSON", columnNames = {"PERSON_ID"})
+})
+public class Account {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
@@ -20,7 +20,11 @@ public class User {
     private String userName;
     private String password;
 
-    public User(int id) {
+    @OneToOne(optional = false)
+    @JoinColumn(name="PERSON_ID")
+    private Person person;
+
+    public Account(int id) {
         this.id = id;
     }
 }
