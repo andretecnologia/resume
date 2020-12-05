@@ -9,9 +9,6 @@ import javax.persistence.*;
 @Builder
 @Entity
 @ToString(of = "id")
-@Table(name = "ACCOUNT", uniqueConstraints = {
-        @UniqueConstraint(name = "UNQ_ACCOUNT_PERSON", columnNames = {"PERSON_ID"})
-})
 public class Account {
 
     @Id
@@ -20,8 +17,7 @@ public class Account {
     private String userName;
     private String password;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name="PERSON_ID")
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private Person person;
 
     public Account(int id) {

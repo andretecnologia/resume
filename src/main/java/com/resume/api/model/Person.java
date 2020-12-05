@@ -10,6 +10,9 @@ import java.util.Objects;
 @Builder
 @Entity
 @ToString(of = "id")
+@Table(name = "PERSON", uniqueConstraints = {
+        @UniqueConstraint(name = "UNQ_PERSON_ACCOUNT", columnNames = {"ACCOUNT_ID"})
+})
 public class Person {
 
     @Id
@@ -20,7 +23,8 @@ public class Person {
 
     private String documentId;
 
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(optional = false, cascade=CascadeType.ALL)
+    @JoinColumn(name="ACCOUNT_ID")
     private Account account;
 
     public Person(String firstName, String documentId, Account account) {

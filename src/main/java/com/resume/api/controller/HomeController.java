@@ -23,9 +23,9 @@ public class HomeController {
     }
 
     @GetMapping
-    public String start() {
+    public String home() {
         run();
-        return "http://localhost:8080/h2-database!";
+        return "<a href='http://localhost:8080/h2-database'>Test</a>";
     }
 
     private void run() {
@@ -35,7 +35,7 @@ public class HomeController {
         generateSampleData("Mary", "123456-7", "mary_user3", "1234", "Mary Jones", Gender.FEMALE );
 
         Review review = Review.builder()
-                .person(new Person(1))
+                .reviewer(new Person(3))
                 .resume(new Resume(1))
                 .score(10)
         .build();

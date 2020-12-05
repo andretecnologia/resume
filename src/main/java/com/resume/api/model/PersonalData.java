@@ -10,9 +10,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @ToString(of = "id")
-@Table(name = "PERSONAL_INFO", uniqueConstraints = {
-        @UniqueConstraint(name = "UNQ_PERSONAL_INFO_RESUME", columnNames = {"RESUME_ID"})
-})
+@Table(name = "PERSONAL_DATA")
 public class PersonalData {
 
     @Id
@@ -22,7 +20,6 @@ public class PersonalData {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name="RESUME_ID")
+    @OneToOne(mappedBy = "personaldata", cascade = CascadeType.ALL, orphanRemoval = true)
     private Resume resume;
 }

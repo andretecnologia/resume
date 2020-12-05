@@ -18,8 +18,8 @@ public class Review {
     private Integer id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "PERSON_ID")
-    private Person person;
+    @JoinColumn(name = "REVIEWER_ID")
+    private Person reviewer;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "RESUME_ID")
